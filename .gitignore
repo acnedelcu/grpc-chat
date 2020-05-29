@@ -298,3 +298,6 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/visualstudio
+Grpc-Chat/Server/appsettings.json
+Grpc-Chat/Server/appsettings.Development.json
+Grpc-Chat/Server/Server.csproj
