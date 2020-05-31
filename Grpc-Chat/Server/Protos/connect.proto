@@ -1,0 +1,15 @@
+syntax = "proto3";
+//import  "google/probuf/empty.proto";
+option csharp_namespace = "Server.Protos";
+
+
+service Connect{
+
+rpc SendUsername(ConnectedRequest) returns (Confirmation);
+}
+message ConnectedRequest{
+	string username=1;
+}
+message Confirmation{
+     string connectedConfirmation=1;
+}
