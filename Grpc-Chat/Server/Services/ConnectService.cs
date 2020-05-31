@@ -16,7 +16,7 @@ namespace Server
             Console.WriteLine("User "+request.Username+" has connected!");
 
             Confirmation confirmationMessage = new Confirmation();
-            string messageToSend= "You have sucessfully connected to the server!";
+            string messageToSend= "You have successfully connected to the server!";
             confirmationMessage.ConnectedConfirmation = messageToSend;
             return Task.FromResult(confirmationMessage);
         }
