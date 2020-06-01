@@ -43,14 +43,9 @@ namespace Client
             //     byte[] MsgFromServer = new byte[1024];
             // }
 
-            //var channel = GrpcChannel.ForAddress("https://localhost:5001");
-            //var Client = new Connect.ConnectClient(channel);
-            //Console.WriteLine("Please type in your name:");
-            //string name = Console.ReadLine();
-            //var username = new ConnectedRequest { Username = name };
-            //var reply = await Client.SendUsernameAsync(username).ResponseAsync.ConfigureAwait(false);
-            //Console.WriteLine(reply.ConnectedConfirmation);
-
+            Console.WriteLine("Please type in your name:");
+            string name = Console.ReadLine();
+          
 
             IPAddress ip = IPAddress.Parse("127.0.0.1");
 
@@ -68,10 +63,9 @@ namespace Client
             Console.Write("Send a message: ");
             while (!string.IsNullOrEmpty((s = Console.ReadLine())))
             {
-                Console.Write("Message sent: ");
+                //Console.Write("Message sent from "+ name + ": ");
                 byte[] buffer = Encoding.ASCII.GetBytes(s);
-                ns.Write(buffer, 0, buffer.Length);
-            }
+                ns.Write(buffer, 0, buffer.Length);            }
 
             client.Client.Shutdown(SocketShutdown.Send);
             thread.Join();
@@ -85,10 +79,15 @@ namespace Client
             NetworkStream ns = client.GetStream();
             byte[] receivedBytes = new byte[1024];
             int byte_count;
-
+           
             while ((byte_count = ns.Read(receivedBytes, 0, receivedBytes.Length)) > 0)
             {
+                Console.Write("Message received: ");
+                Console.WriteLine();
                 Console.Write(Encoding.ASCII.GetString(receivedBytes, 0, byte_count));
+                Console.WriteLine();
+                Console.Write("Send a message: ");
+                Console.WriteLine();
             }
         }
     }

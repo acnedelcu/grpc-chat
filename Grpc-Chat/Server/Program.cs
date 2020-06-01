@@ -1,16 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Grpc.Net.Client;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Server.Protos;
 
 namespace Server
 {
@@ -78,13 +73,15 @@ namespace Server
         public static void broadcast(string data)
         {
             byte[] buffer = Encoding.ASCII.GetBytes(data + Environment.NewLine);
-
+            
             lock (_lock)
             {
+
+               
                 foreach (TcpClient c in list_clients.Values)
                 {
                     NetworkStream stream = c.GetStream();
-
+                    
                     stream.Write(buffer, 0, buffer.Length);
                 }
             }
