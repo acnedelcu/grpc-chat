@@ -76,6 +76,20 @@ namespace Server
             client.Close();
         }
 
+        public static void broadcast(string data)
+        {
+            byte[] buffer = Encoding.ASCII.GetBytes(data + Environment.NewLine);
+
+            lock (_lock)
+            {
+                foreach (TcpClient c in list_clients.Values)
+                {
+                    NetworkStream stream = c.GetStream();
+
+                    stream.Write(buffer, 0, buffer.Length);
+                }
+            }
+        }
 
     }
 }
