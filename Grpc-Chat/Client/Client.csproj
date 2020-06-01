@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Protos\chat.proto" />
     <None Remove="Protos\connect.proto" />
-    <None Remove="Protos\greet.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\connect.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\greet.proto">
+    <Protobuf Include="Protos\chat.proto">
       <GrpcServices>Client</GrpcServices>
     </Protobuf>
   </ItemGroup>
