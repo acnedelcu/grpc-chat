@@ -16,8 +16,6 @@ namespace Server
 {
     public class Program
     {
-
-
         // Additional configuration is required to successfully run gRPC on macOS.
         // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -32,9 +30,10 @@ namespace Server
 
         static void Main(string[] args)
         {
+
             //  CreateHostBuilder(args).Build().Run();
             int count = 1;
-
+             
             TcpListener ServerSocket = new TcpListener(IPAddress.Any, 5000);
             ServerSocket.Start();
 
@@ -42,7 +41,7 @@ namespace Server
             {
                 TcpClient client = ServerSocket.AcceptTcpClient();
                 lock (_lock) list_clients.Add(count, client);
-                Console.WriteLine("Someone connected!!");
+                Console.WriteLine("Someone connected!");
                 Thread t = new Thread(handle_clients);
                 t.Start(count);
                 count++;
