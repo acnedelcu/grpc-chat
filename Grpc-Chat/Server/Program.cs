@@ -48,17 +48,34 @@ namespace Server
                 count++;
             }
         }
-        static void ReceiveData(TcpClient client)
+        public static void handle_clients(object o)
         {
-            NetworkStream ns = client.GetStream();
-            byte[] receivedBytes = new byte[1024];
-            int byte_count;
+            int id = (int)o;
+            TcpClient client;
 
-            while ((byte_count = ns.Read(receivedBytes, 0, receivedBytes.Length)) > 0)
+            lock (_lock) client = list_clients[id];
+
+            while (true)
             {
-                Console.Write(Encoding.ASCII.GetString(receivedBytes, 0, byte_count));
+                NetworkStream stream = client.GetStream();
+                byte[] buffer = new byte[1024];
+                int byte_count = stream.Read(buffer, 0, buffer.Length);
+
+                if (byte_count == 0)
+                {
+                    break;
+                }
+
+                string data = Encoding.ASCII.GetString(buffer, 0, byte_count);
+                broadcast(data);
+                Console.WriteLine(data);
             }
+
+            lock (_lock) list_clients.Remove(id);
+            client.Client.Shutdown(SocketShutdown.Both);
+            client.Close();
         }
-    
+
+
     }
 }
