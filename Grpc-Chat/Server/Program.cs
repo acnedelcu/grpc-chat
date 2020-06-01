@@ -31,10 +31,10 @@ namespace Server
         static void Main(string[] args)
         {
 
-            //  CreateHostBuilder(args).Build().Run();
+            //CreateHostBuilder(args).Build().Run();
             int count = 1;
              
-            TcpListener ServerSocket = new TcpListener(IPAddress.Any, 5000);
+            TcpListener ServerSocket = new TcpListener(IPAddress.Any, 5000); //Modify port to 5001 to use ConnectService
             ServerSocket.Start();
 
             while (true)

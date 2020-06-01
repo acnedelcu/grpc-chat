@@ -11,6 +11,16 @@ namespace Client
 {
     class Program
     {
+        //public static async void GetConnectedConf()
+        //{
+        //    var channel = GrpcChannel.ForAddress("https://localhost:5001");
+        //    var Client = new Connect.ConnectClient(channel);
+        //    Console.WriteLine("Please type in your name:");
+        //    string name = Console.ReadLine();
+        //    var username = new ConnectedRequest { Username = name };
+        //    var reply = await Client.SendUsernameAsync(username);
+        //    Console.WriteLine(reply.ConnectedConfirmation);
+        //}
         static async Task Main(string[] args)
         {
             // var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -33,16 +43,18 @@ namespace Client
             //     byte[] MsgFromServer = new byte[1024];
             // }
 
-          //  var channel = GrpcChannel.ForAddress("https://localhost:5001");
-           // var Client = new Connect.ConnectClient(channel);
-            Console.WriteLine("Please type in your name:");
-            string name = Console.ReadLine();
-            var username = new ConnectedRequest { Username = name };           
-           // var reply = await Client.SendUsernameAsync(username);
+            //var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            //var Client = new Connect.ConnectClient(channel);
+            //Console.WriteLine("Please type in your name:");
+            //string name = Console.ReadLine();
+            //var username = new ConnectedRequest { Username = name };
+            //var reply = await Client.SendUsernameAsync(username).ResponseAsync.ConfigureAwait(false);
             //Console.WriteLine(reply.ConnectedConfirmation);
 
+
             IPAddress ip = IPAddress.Parse("127.0.0.1");
-            int port = 5000;
+
+            int port = 5000; //For the ConnectService port must be 5001
             TcpClient client = new TcpClient();
             client.Connect(ip, port);
             Console.WriteLine();
